@@ -4,29 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <title>Document</title>
+
 </head>
 <body>
-    <div id="addEmployeeContainer">
-        <div id="employeeList">
-            <div id="employeeListCol">
-                <form id="addEmployee">
-                    <legend>List of Employees</legend>
-                    
-                </form>
-            </div>
-        </div>
-    </div>
+    
+    <h3>List of Employees</h3>
+    <ol id="employeeList"></ol>
     <form action='http://localhost:3000/employeeList' method='POST'>
         <div>
             <label for='fullName'>Name</label>
-            <input id='fullName' name='fullName' class="form-control" type='text' placeholder="Employee Full Name"/>
+            <input id='fullName' name='fullName' type='text' placeholder="Employee Full Name"/>
         </div>
-        <div class='form-row'>
+        <div>
             <label for='gender'>Gender</label>
-            <div class="form-check form-check-inline">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="gender" id="Gender-M" value="Male">
+            <div>
+                <label>
+                    <input type="radio" name="gender" id="Gender-M" value="Male">
                     Male     
                 </label>
                 <label class="form-check-label">
@@ -35,15 +30,16 @@
                 </label>
             </div>
         </div>
-        <div class='form-row'>
+        <div>
             <label for='email'>Email</label>
-            <input id='email' name='email' class="form-control" type='email' placeholder='johndoe@email.com'/>
+            <input id='email' name='email' type='email' placeholder='johndoe@email.com'/>
         </div>
-        <div class='form-row'>
+        <div>
             <label for='phoneNumber'>Phone Number</label>
-            <input id='phoneNumber' name='phoneNumber' class="form-control" type='number' placeholder="+234xxxxxxxxxx"/>
+            <input id='phoneNumber' name='phoneNumber' type='number' placeholder="+234xxxxxxxxxx"/>
         </div>
+        <button id="createEmployee">save</button>
     </form>
-    
+    <script src="./simpleAttendance2.js"></script>
 </body>
 </html>
