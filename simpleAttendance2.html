@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="./simpleAttendance2.css">
     <title>Document</title>
 
 </head>
 <body>
-    
     <h3>List of Employees</h3>
     <ol id="employeeList"></ol>
+    <h3>Create employee</h3>
     <form action='http://localhost:3000/employeeList' method='POST'>
         <div>
             <label for='fullName'>Name</label>
@@ -39,6 +42,26 @@
             <input id='phoneNumber' name='phoneNumber' type='number' placeholder="+234xxxxxxxxxx"/>
         </div>
         <button id="createEmployee">save</button>
+    </form>
+    <h3>Create meeting</h3>
+    <form action="http://localhost:3000/meeting" method="POST">
+        <div>
+            <label for='date'>Select date</label>
+            <input id="date" type="text" size="10" name="date">
+        </div>
+        <div>
+            <label for='subject'>Subject</label>
+            <input id='subject' name='subject' type='text' placeholder='Meeting subject'/>
+        </div>
+        <button id="createMeeting">save</button>
+    </form>
+    <h3>Add empployee to meeting</h3>
+    <form action="">
+        <select name='selectMeeting' id='selectMeeting'>
+            <option value="" disabled selected>Select meeting</option>
+        </select>
+        <ul id="meetingEmployee"></ul>
+        <button id="addEmployee">sumbit</button>
     </form>
     <script src="./simpleAttendance2.js"></script>
 </body>

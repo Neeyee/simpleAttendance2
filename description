@@ -3,10 +3,10 @@ You recently got a call from a client to build a system
 that keeps track of his company’s meeting attendance. 
 You are required to build a minimum viable product(MVP) 
 that carries out the following operations.
-1-Create employee
-2-Read all employees
+1-Create employee -d
+2-Read all employees -d
 3-Read one employee 
-4-Delete an employee
+4-Delete an employee -d
 5-Create a meeting
 6-Add an employee to a meeting
 7-Mark Attendance for employees for a meeting

@@ -1,13 +1,31 @@
 {
-  "employeeList": [],
-  "comments": [
+  "employeeList": [
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "name": "test",
+      "gender": "Female",
+      "email": "heas@gm.com",
+      "phoneNumber": "23456789",
+      "id": 1
+    },
+    {
+      "name": "Jane Doe",
+      "gender": "Female",
+      "email": "janedoe@email.com",
+      "phoneNumber": "2348975440392",
+      "id": 2
     }
   ],
-  "profile": {
-    "name": "typicode"
+  "meeting": [
+    {
+      "date": "10/12/2019",
+      "subject": "talking",
+      "id": 1
+    }
+  ],
+  "attendance": {
+    "meeting": "typicode",
+    "employee": "joe",
+    "status": ""
+
   }
 }
