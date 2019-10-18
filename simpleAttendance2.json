@@ -1,17 +1,17 @@
 {
   "employeeList": [
     {
-      "name": "test",
-      "gender": "Female",
-      "email": "heas@gm.com",
-      "phoneNumber": "23456789",
+      "name": "Mathew Taiwo",
+      "gender": "Male",
+      "email": "mthewtaiwo@yahoo.com",
+      "phoneNumber": "234805439028",
       "id": 1
     },
     {
-      "name": "Jane Doe",
+      "name": "Funmi Mathew",
       "gender": "Female",
-      "email": "janedoe@email.com",
-      "phoneNumber": "2348975440392",
+      "email": "funmimathew@gmail.com",
+      "phoneNumber": "2349078339927",
       "id": 2
     }
   ],
@@ -20,12 +20,28 @@
       "date": "10/12/2019",
       "subject": "talking",
       "id": 1
+    },
+    {
+      "date": "10/18/2019",
+      "subject": "wonder",
+      "id": 2
+    },
+    {
+      "date": "10/22/2019",
+      "subject": "all join",
+      "id": 3
+    },
+    {
+      "date": "10/02/2019",
+      "subject": "Discussion",
+      "id": 4
     }
   ],
-  "attendance": {
-    "meeting": "typicode",
-    "employee": "joe",
-    "status": ""
-
-  }
+  "meetingData": [
+    {
+      "name": "talking",
+      "attendees": "[\"Jane Doe\",\"Jonathan Badguy\"]",
+      "id": 1
+    }
+  ]
 }

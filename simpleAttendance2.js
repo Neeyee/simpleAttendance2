@@ -67,17 +67,7 @@ $(function () {
     //get employee  names to be added to meeting
     $.get("http://localhost:3000/employeeList", function(employeeInfo){
         $.each(employeeInfo, function(i){
-            $('#meetingEmployee').append(`<li><input type="checkbox" value="${employeeInfo[i].name}">${employeeInfo[i].name} 
-            <div>
-                <p>Attendance</p>
-                <div>
-                    <input type="radio" name="attendance${employeeInfo[i].id}" id="attendancePresent" value="Present">
-                    <label>Present</label>
-                    <input type="radio" name="attendance${employeeInfo[i].id}" id="attendanceAbsent" value="Absent">
-                    <label>Absent</label>
-                </div>
-            </div>
-            </li>`)
+            $('#meetingEmployee').append(`<li><input type="checkbox" value='${employeeInfo[i].name}'>${employeeInfo[i].name}</li>`)
         });
     });
     
@@ -86,5 +76,34 @@ $(function () {
         $.each(selectMeeting, function(i){
             $('#selectMeeting').append(`<option value="${selectMeeting[i].subject}">${selectMeeting[i].subject}</option>`)
         });
+    });
+
+    //add meeting attendees to server
+    $('#addEmployee').click(function (e) {
+       e.preventDefault();
+       
+       let meetingAttendeesArr = [];
+       const selectedMeeting = $('#selectMeeting option:selected').val();
+       $('#meetingEmployee input:checked').each(function () {
+           meetingAttendeesArr.push($(this).val());
+            //    console.log(meetingAttendees)
+            //    console.log(selectedMeeting)
+       });
+
+       stringMeetingAttendeesArr = JSON.stringify(meetingAttendeesArr)
+       //console.log(stringMeetingAttendeesArr);
+       
+       const meetingData = {
+           name:selectedMeeting,
+           attendees:stringMeetingAttendeesArr
+       }
+       //console.log(selectedMeeting)
+        if (selectedMeeting === '' ){
+            alert('Please select meeting')
+        } else if(stringMeetingAttendeesArr == "[]" ) {
+            alert('Please select employee(s) to be added to meeting')
+        } else {
+            $.post('http://localhost:3000/meetingData', meetingData, alert('Meeting attendees have been added'));
+        }
     });
 });
