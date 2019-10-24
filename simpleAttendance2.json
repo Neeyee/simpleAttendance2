@@ -1,18 +1,46 @@
 {
   "employeeList": [
     {
-      "name": "Mathew Taiwo",
-      "gender": "Male",
-      "email": "mthewtaiwo@yahoo.com",
-      "phoneNumber": "234805439028",
-      "id": 1
-    },
-    {
       "name": "Funmi Mathew",
       "gender": "Female",
       "email": "funmimathew@gmail.com",
       "phoneNumber": "2349078339927",
       "id": 2
+    },
+    {
+      "name": "Maliq Qudus",
+      "gender": "Male",
+      "email": "maliqqudud@yahoo.com",
+      "phoneNumber": "23445389614",
+      "id": 3
+    },
+    {
+      "name": "Dope Seller",
+      "gender": "Female",
+      "email": "sexyaf@dope.com",
+      "phoneNumber": "2346969696969",
+      "id": 4
+    },
+    {
+      "name": "Finance Guy",
+      "gender": "Male",
+      "email": "finacn@gmail.com2",
+      "phoneNumber": "34765893424",
+      "id": 5
+    },
+    {
+      "name": "user1",
+      "gender": "Female",
+      "email": "mait@gmail.com",
+      "phoneNumber": "765432",
+      "id": 6
+    },
+    {
+      "name": "user3",
+      "gender": "Male",
+      "email": "user@user.com",
+      "phoneNumber": "56789039",
+      "id": 7
     }
   ],
   "meeting": [
@@ -35,6 +63,16 @@
       "date": "10/02/2019",
       "subject": "Discussion",
       "id": 4
+    },
+    {
+      "date": "10/16/2019",
+      "subject": "jogging",
+      "id": 5
+    },
+    {
+      "date": "10/25/2019",
+      "subject": "dope stuff",
+      "id": 6
     }
   ],
   "meetingData": [
@@ -42,6 +80,60 @@
       "name": "talking",
       "attendees": "[\"Jane Doe\",\"Jonathan Badguy\"]",
       "id": 1
+    },
+    {
+      "name": "wonder",
+      "attendees": "[\"Funmi Mathew\"]",
+      "id": 2
+    },
+    {
+      "name": "jogging",
+      "attendees": "[\"Funmi Mathew\"]",
+      "id": 3
+    },
+    {
+      "name": "all join",
+      "attendees": "[\"Funmi Mathew\",\"Maliq Qudus\"]",
+      "id": 4
+    },
+    {
+      "name": "dope stuff",
+      "attendees": "[\"Maliq Qudus\",\"Dope Seller\"]",
+      "id": 5
+    },
+    {
+      "name": "Discussion",
+      "attendees": "[\"Funmi Mathew\",\"Maliq Qudus\",\"Dope Seller\",\"Finance Guy\",\"user1\",\"user3\"]",
+      "id": 6
+    },
+    {
+      "name": "all join",
+      "attendees": "[\"Dope Seller\",\"Finance Guy\",\"user1\"]",
+      "id": 7
+    },
+    {
+      "name": "Discussion",
+      "attendees": "[\"user1\"]",
+      "id": 8
+    },
+    {
+      "name": "all join",
+      "attendees": "[\"Dope Seller\",\"Finance Guy\"]",
+      "id": 9
+    }
+  ],
+  "attendanceData": [
+    {
+      "subject": "all join",
+      "meetingAttendees": "[\"Dope Seller\",\"Finance Guy\",\"user1\"]",
+      "attendanceStatus": "[\"Absent\",\"Present\",\"Present\"]",
+      "id": 1
+    },
+    {
+      "subject": "dope stuff",
+      "meetingAttendees": "[\"Maliq Qudus\",\"Dope Seller\"]",
+      "attendanceStatus": "[\"Absent\",\"Present\"]",
+      "id": 2
     }
   ]
 }

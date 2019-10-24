@@ -56,13 +56,21 @@
         <button id="createMeeting">save</button>
     </form>
     <h3>Add empployee to meeting</h3>
-    <form action="">
+    <form action="http://localhost:3000/meetingData" method="POST">
         <select name='selectMeeting' id='selectMeeting'>
             <option value="" disabled selected>Select meeting</option>
         </select>
         <ul id="meetingEmployee"></ul>
         <button id="addEmployee">sumbit</button>
     </form>
+    <h3>Mark Attendance</h3>
+    <div id="takeAttendance"></div>
+    <h3>View Attendance</h3>
+    <div id="viewAttendance"></div>
+        
+   
+        
+    
     <script src="./simpleAttendance2.js"></script>
 </body>
 </html>

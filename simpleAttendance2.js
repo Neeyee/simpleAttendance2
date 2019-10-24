@@ -34,7 +34,7 @@ $(function () {
     $('#employeeList').on('click', '.removeEmployee', function (e) {
        e.preventDefault();
 
-       let delEmpResponse = confirm('Are you sure you want to delete employee?');
+       let delEmpResponse = confirm('Are you sure to delete employee?');
        if (delEmpResponse) {
         $.ajax({
             type: 'DELETE',
@@ -87,8 +87,10 @@ $(function () {
        $('#meetingEmployee input:checked').each(function () {
            meetingAttendeesArr.push($(this).val());
             //    console.log(meetingAttendees)
-            //    console.log(selectedMeeting)
+              // console.log($(this).val())
        });
+
+       
 
        stringMeetingAttendeesArr = JSON.stringify(meetingAttendeesArr)
        //console.log(stringMeetingAttendeesArr);
@@ -102,8 +104,93 @@ $(function () {
             alert('Please select meeting')
         } else if(stringMeetingAttendeesArr == "[]" ) {
             alert('Please select employee(s) to be added to meeting')
+            //input another if statement to check if employees
+            //have been added already, but get meetingData.name and store it, 
+            //loop to check.
         } else {
             $.post('http://localhost:3000/meetingData', meetingData, alert('Meeting attendees have been added'));
         }
     });
+
+    //get meeting subject and employee names from meeting data with checkbox in li
+    $.get("http://localhost:3000/meetingData", function(meeting){
+        $.each(meeting, function(i){
+ 
+            $('#takeAttendance').append(`<form id="submitAttendance" >
+            <h4>${meeting[i].name}</h4>
+            <ol id="attendanceList">
+            ${JSON.parse(meeting[i].attendees).map(function(meetingAttendees){
+                return `<li class="markAttendance"><input type="checkbox" class="attendanceCheckbox">${meetingAttendees}</li>`
+            }).join('')}
+            </ol>
+            <button data-id="${meeting[i].id}" class="saveAttendance" >sumbit</button>
+            </form>`)
+            
+        });
+    });
+
+    //save attendance data
+    $('#takeAttendance').on('click', '.saveAttendance', function(e) {
+        e.preventDefault();
+
+        let currentForm = $(this).closest('form');       
+        let meetingSubject = currentForm.find('h4').text();
+        let attendees = JSON.stringify($(currentForm.find('li')).map(function (i, li) {
+            return $(li).text()
+           //console.log({attendee: $(li).text()});
+        }).get())
+
+        let status = JSON.stringify($(currentForm.find('.attendanceCheckbox')).map(function () {
+            return (this.checked) ? 'Present' : 'Absent'
+          //  console.log(this.checked);
+        }).get())
+            // console.log({name: attendanceReport.attendee, status: attendanceReport.status});
+         //console.log(attendanceReport);
+
+        const attendanceData = {
+            subject: meetingSubject,
+            meetingAttendees: attendees,
+            attendanceStatus: status
+         }
+         //console.log(attendanceData);
+         $.post('http://localhost:3000/attendanceData', attendanceData, alert(`Attendance for meeting: ${meetingSubject}  has been recorded`))
+     
+    })
+
+    //get attendnce data to div
+    $.get('http://localhost:3000/attendanceData', function(attendance) {
+        $.each(attendance, function(i){
+            $('#viewAttendance').append(`<div>
+                <h4>${attendance[i].subject}</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Employee</th>
+                            <th>Attendance status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <ol>
+                                    ${JSON.parse(attendance[i].meetingAttendees).map(function (employee) {
+                                        return `<li>${employee}</li>`
+                                    }).join('')}
+                                </ol>
+                            </td>
+                            <td>
+                                <ol>
+                                    ${JSON.parse(attendance[i].attendanceStatus).map(function (status) {
+                                        return `<li>${status}</li>`
+                                    }).join('')}
+                                </ol> 
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>`)
+        });
+    });
+     
 });
