@@ -1,5 +1,24 @@
 $(function () {
-    //
+    
+    //login
+    $('#giveUserAccess').click(function(e){
+        e.preventDefault();
+        let passwordValue = 'password'
+        if ($('#password').val() === passwordValue) {
+            window.location.href = './simpleAttendance2.html'
+        } else {
+            $('#wrongPassword').show();
+            setTimeout(function() { $("#wrongPassword").hide(); }, 3000);
+        }
+        $('#password').val('')
+    });
+
+    //sign out
+    $('#logOUt').click(function(e) {
+        e.preventDefault();
+        window.confirm('Do you want to sign out') ? window.location.href = './login.html' : ''
+    });
+    
     //create employee
     $('#createEmployee').click(function (e) {
         e.preventDefault();
