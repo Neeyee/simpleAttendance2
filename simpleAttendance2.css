@@ -1,3 +1,19 @@
+body{
+    background-image: url(./img/drew-beamer-Se7vVKzYxTI-unsplash.jpg)
+}
+
+.margin-bottom {
+    margin-bottom:15px;
+}
+
+.margin-right {
+    margin-right:15px;
+}
+    
+.hidden {
+    display:none;
+}
+
 li {
     list-style-type: none;
 }

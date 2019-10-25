@@ -1,4 +1,5 @@
 $(function () {
+    //
     //create employee
     $('#createEmployee').click(function (e) {
         e.preventDefault();
@@ -26,7 +27,14 @@ $(function () {
     //read all employee
     $.get("http://localhost:3000/employeeList", function(employeeInfo){
         $.each(employeeInfo, function(i){
-            $('#employeeList').append(`<li>${employeeInfo[i].name} ${employeeInfo[i].gender} ${employeeInfo[i].email} ${employeeInfo[i].phoneNumber} <button data-id='${employeeInfo[i].id}' class='removeEmployee'>Delete</button></li>`)
+            $('#employeeList').append(`
+            <tr>
+                <td>${employeeInfo[i].name}</td>
+                <td>${employeeInfo[i].gender}</td>
+                <td>${employeeInfo[i].email}</td>
+                <td>${employeeInfo[i].phoneNumber}</td>
+                <td><button style="font-size:24px;" data-id='${employeeInfo[i].id}' class='removeEmployee'><i class="fa fa-trash-o"></i></button></td>
+            </tr>`)
         });
     });
 
@@ -67,7 +75,7 @@ $(function () {
     //get employee  names to be added to meeting
     $.get("http://localhost:3000/employeeList", function(employeeInfo){
         $.each(employeeInfo, function(i){
-            $('#meetingEmployee').append(`<li><input type="checkbox" value='${employeeInfo[i].name}'>${employeeInfo[i].name}</li>`)
+            $('#meetingEmployee').append(`<li class="list-group-item" ><input class="margin-right" type="checkbox" value='${employeeInfo[i].name}'>${employeeInfo[i].name}</li>`)
         });
     });
     
@@ -117,13 +125,24 @@ $(function () {
         $.each(meeting, function(i){
  
             $('#takeAttendance').append(`<form id="submitAttendance" >
-            <h4>${meeting[i].name}</h4>
-            <ol id="attendanceList">
-            ${JSON.parse(meeting[i].attendees).map(function(meetingAttendees){
-                return `<li class="markAttendance"><input type="checkbox" class="attendanceCheckbox">${meetingAttendees}</li>`
-            }).join('')}
-            </ol>
-            <button data-id="${meeting[i].id}" class="saveAttendance" >sumbit</button>
+            <div class="container">
+                <div class="row">
+                    <a class="btn col-xs-3 mr-3" id="showMeetingAttendees" style="border: solid 1px black"><i class="fa fa-user"></i><i class="fa fa-caret-down"></i></a>
+                    <p class="h4 col-xs-6"> Meeting: ${meeting[i].name}</p>
+                </div>
+            </div>
+            <div class='container content-container'>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <ol class="list-group list-group-flush" id="attendanceList" style="display:none">
+                            ${JSON.parse(meeting[i].attendees).map(function(meetingAttendees){
+                                return `<li class="list-group-item"><input class="margin-right" type="checkbox" class="attendanceCheckbox">${meetingAttendees}</li>`
+                            }).join('')}
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <button data-id="${meeting[i].id}" class="saveAttendance btn btn-info my-4">Save</button>
             </form>`)
             
         });
@@ -162,26 +181,26 @@ $(function () {
         $.each(attendance, function(i){
             $('#viewAttendance').append(`<div>
                 <h4>${attendance[i].subject}</h4>
-                <table>
-                    <thead>
+                <table class="table table-sm">
+                    <thead class="thead-light">
                         <tr>
-                            <th>Employee</th>
-                            <th>Attendance status</th>
+                            <th scope="col">Employee</th>
+                            <th scope="col">Attendance status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>
-                                <ol>
+                                <ol class="">
                                     ${JSON.parse(attendance[i].meetingAttendees).map(function (employee) {
-                                        return `<li>${employee}</li>`
+                                        return `<li >${employee}</li>`
                                     }).join('')}
                                 </ol>
                             </td>
                             <td>
-                                <ol>
+                                <ol class="">
                                     ${JSON.parse(attendance[i].attendanceStatus).map(function (status) {
-                                        return `<li>${status}</li>`
+                                        return `<li >${status}</li>`
                                     }).join('')}
                                 </ol> 
                             </td>
@@ -192,5 +211,14 @@ $(function () {
             </div>`)
         });
     });
-     
+     //bs
+   
+    $("#showAttendees").click(function () {
+        $("#meetingEmployee").toggle();
+    });
+
+    $('#takeAttendance').on('click', '#showMeetingAttendees', function() {
+        let currentList = $(this).closest('form');
+        currentList.find('#attendanceList').toggle();
+    });
 });

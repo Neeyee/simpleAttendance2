@@ -6,70 +6,156 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./simpleAttendance2.css">
-    <title>Document</title>
-
+    
+    <title>Simple Attendance</title>
 </head>
 <body>
-    <h3>List of Employees</h3>
-    <ol id="employeeList"></ol>
-    <h3>Create employee</h3>
-    <form action='http://localhost:3000/employeeList' method='POST'>
-        <div>
-            <label for='fullName'>Name</label>
-            <input id='fullName' name='fullName' type='text' placeholder="Employee Full Name"/>
-        </div>
-        <div>
-            <label for='gender'>Gender</label>
-            <div>
-                <label>
-                    <input type="radio" name="gender" id="Gender-M" value="Male">
-                    Male     
-                </label>
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="gender" id="Gender-F" value="Female">
-                    Female
-                </label>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow">
+            <div class="container">
+                <a class="navbar-brand" href="#">COMPANY'S HEADER</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto" >
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#meetingDiv">Meeting</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#attendanceDiv">Attendance</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#">Sign out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class='container content-container'>
+        <div class="row justify-content-center">
+                <a class="btn col-sm-4 mr-5" style="border: solid 1px black" href="#attendanceModal" data-toggle="modal">View attendance</a>
+            <div class="col-sm-10">
+                <div class="row margin-bottom">
+                    <a class="btn btn-default-btn-xs col-xs-2 mr-5 ml-4" style="border: solid 1px black" href="#employeeModal" data-toggle="modal">Add   <i class="fa fa-user"></i></a>
+                    <h3 class="col-xs-6 ">List of Employees</h3>
+                </div>
+                <table class="table table-sm">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Employee</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone number</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="employeeList"></tbody>
+                </table>
             </div>
         </div>
-        <div>
-            <label for='email'>Email</label>
-            <input id='email' name='email' type='email' placeholder='johndoe@email.com'/>
+    </div>
+ 
+    <div class='container content-container' id="meetingDiv">
+        <div class="row justify-content-center">
+            <div class="col-sm-4">
+                <form class="border border-light p-5" action="http://localhost:3000/meeting" method="POST">
+                    <p class="h4 mb-4 text-center">Add meeting schedule</p>
+                    <input class="form-control margin-bottom" id='subject' name='subject' type='text' placeholder='Meeting subject'/>
+                    <input class="form-control margin-bottom" id="date" type="text" size="10" name="date" placeholder='Date'>
+                    <button class="btn btn-info my-4 btn-block" id="createMeeting">Save</button>
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <form class="border border-light p-5" action="http://localhost:3000/meetingData" method="POST">
+                    <p class="h4 mb-4 text-center">Set meeting & attendees</p>
+                    <select class="form-control colorful-select dropdown-default margin-bottom" name='selectMeeting' id='selectMeeting'>
+                        <option value="" disabled selected>Select meeting</option>
+                    </select>
+                    <a class="btn" id="showAttendees" style="border: solid 1px black">Attendees</a>
+                    <ul class="list-group list-group-flush" id="meetingEmployee" style="display:none"></ul>
+                    <button class="btn btn-info my-4 btn-block" id="addEmployee">Save</button>
+                </form>
+            </div>
         </div>
-        <div>
-            <label for='phoneNumber'>Phone Number</label>
-            <input id='phoneNumber' name='phoneNumber' type='number' placeholder="+234xxxxxxxxxx"/>
+    </div>
+    
+    <div class='container content-container' id="attendanceDiv">
+        <div class="row justify-content-center">
+            <div class="col-sm-6">
+                <p class="h4 mb-4 text-center">Mark Attendance</p>
+                <div id="takeAttendance"></div>
+            </div>
         </div>
-        <button id="createEmployee">save</button>
-    </form>
-    <h3>Create meeting</h3>
-    <form action="http://localhost:3000/meeting" method="POST">
-        <div>
-            <label for='date'>Select date</label>
-            <input id="date" type="text" size="10" name="date">
+    </div>
+    <!-- modals -->
+    <div class="modal fade" id="employeeModal" role="dialog" aria-labelledby="employeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header-warning">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class='container content-container'>
+                        <div class="row justify-content-center">
+                            <div class="col-sm-12">
+                                <form class="border border-light p-5" action='http://localhost:3000/employeeList' method='POST'>
+                                    <p class="h4 mb-4 text-center">Add employee</p>
+                                    <input class="form-control margin-bottom" id='fullName' name='fullName' type='text' placeholder="Employee Full Name"/>
+                                    <div class="custom-control custom-radio custom-control-inline margin-bottom">
+                                        <input class="custom-control-input" type="radio" name="gender" id="Gender-M" value="Male">
+                                        <label class="custom-control-label" for="Gender-M">Male</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input class="custom-control-input" type="radio" name="gender" id="Gender-F" value="Female">
+                                        <label class="custom-control-label" for="Gender-F">Female</label>
+                                    </div>
+                                    <input class="form-control mb-4" id='email' name='email' type='email' placeholder='Email'/>
+                                    <input class="form-control" id='phoneNumber' name='phoneNumber' type='number' placeholder="Phone number"/>
+                                    <button class="btn btn-info my-4 btn-block" id="createEmployee">save</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
         </div>
-        <div>
-            <label for='subject'>Subject</label>
-            <input id='subject' name='subject' type='text' placeholder='Meeting subject'/>
+    </div>
+    
+    <div class="modal fade" id="attendanceModal" role="dialog" aria-labelledby="attendanceModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header-warning">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class='container content-container'>
+                        <div class="row justify-content-center">
+                            <div class="col-sm-12">
+                                <p class="h3 mb-4 text-center">View Attendance</p>
+                                <div id="viewAttendance"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
         </div>
-        <button id="createMeeting">save</button>
-    </form>
-    <h3>Add empployee to meeting</h3>
-    <form action="http://localhost:3000/meetingData" method="POST">
-        <select name='selectMeeting' id='selectMeeting'>
-            <option value="" disabled selected>Select meeting</option>
-        </select>
-        <ul id="meetingEmployee"></ul>
-        <button id="addEmployee">sumbit</button>
-    </form>
-    <h3>Mark Attendance</h3>
-    <div id="takeAttendance"></div>
-    <h3>View Attendance</h3>
-    <div id="viewAttendance"></div>
-        
-   
-        
+    </div>
+
     
     <script src="./simpleAttendance2.js"></script>
 </body>
